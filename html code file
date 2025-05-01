@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قناتي على اليوتيوب - تحميل سكربتات فري فاير</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      padding-bottom: 60px; /* مساحة للفوتر الثابت */
+    }
+    .banner {
+      width: 100%;
+      height: 200px;
+      background: url('banner.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 2px #000;
+    }
+    .banner h1 {
+      font-size: 2.5rem;
+    }
+    .content {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    .scripts-list {
+      list-style: none;
+      padding: 0;
+    }
+    .scripts-list li {
+      background-color: white;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .scripts-list .info {
+      flex: 1;
+    }
+    .scripts-list h3 {
+      margin: 0 0 5px;
+      font-size: 1.2rem;
+    }
+    .scripts-list p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .scripts-list .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff9900;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    .scripts-list .download-btn:hover {
+      background-color: #e68a00;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background: #222;
+      color: #fff;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 300px;
+      width: 90%;
+    }
+    .modal-content h2 {
+      margin-bottom: 10px;
+    }
+    .countdown {
+      font-size: 2rem;
+      color: #ff9900;
+      margin: 15px 0;
+    }
+    .real-download {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .real-download:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <section class="banner">
+    <h1>مرحباً بكم في قناتي على اليوتيوب</h1>
+  </section>
+
+  <main class="content">
+    <h2>تحميل سكربتات فري فاير</h2>
+    <ul class="scripts-list">
+      <li>
+        <div class="info">
+          <h3>سكربت الأساسي هيد شوت</h3>
+          <p>سكربت من الفيديو</p>
+        </div>
+        <button class="download-btn" data-file="scripts/basic-hack.zip">تحميل</button>
+      </li>
+      <li>
+        <div class="info">
+          <h3>سكربت أختراق الجدران</h3>
+          <p>سكربت يساعد في أختراق الثلج و الجدران</p>
+        </div>
+        <button class="download-btn" data-file="scripts/graphics-hack.zip">تحميل</button>
+      </li>
+      <li>
+        <div class="info">
+          <h3>سكربت أيم بوت تلقائي</h3>
+          <p>تحذير أنا لست مسؤل عن باند بشكل مباشر</p>
+        </div>
+        <button class="download-btn" data-file="scripts/assistant-bot.zip">تحميل</button>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    &copy; 2025 جميع الحقوق محفوظة لقناتنا على اليوتيوب
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="countdownModal">
+    <div class="modal-content">
+      <h2>جارٍ تجهيز رابط التحميل</h2>
+      <p>انتظر <span class="countdown">10</span> ثانية...</p>
+      <a href="#" class="real-download" id="realDownloadBtn" download>تحميل الملف الآن</a>
+    </div>
+  </div>
+
+  <script>
+  const buttons = document.querySelectorAll('.download-btn');
+  const modal = document.getElementById('countdownModal');
+  const countdownEl = modal.querySelector('.countdown');
+  const realDownloadBtn = document.getElementById('realDownloadBtn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fileUrl = btn.getAttribute('data-file');
+      let countdown = Math.floor(Math.random() * 10) + 1; // 1 إلى 10 ثواني
+
+      countdownEl.textContent = countdown;
+      realDownloadBtn.style.display = 'none';
+      realDownloadBtn.href = '#';
+      modal.style.display = 'flex';
+
+      const interval = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+
+        if (countdown <= 0) {
+          clearInterval(interval);
+          realDownloadBtn.href = fileUrl;
+          realDownloadBtn.style.display = 'inline-block';
+        }
+      }, 1000);
+
+      // عند الضغط خارج المودال يتم الإغلاق
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          clearInterval(interval);
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
+<script>
+  const buttons = document.querySelectorAll('.download-btn');
+  const modal = document.getElementById('countdownModal');
+  const countdownEl = modal.querySelector('.countdown');
+  const realDownloadBtn = document.getElementById('realDownloadBtn');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fileUrl = btn.getAttribute('data-file');
+      let countdown = 10; // عد تنازلي ثابت من 10
+
+      countdownEl.textContent = countdown;
+      realDownloadBtn.style.display = 'none';
+      realDownloadBtn.href = '#';
+      modal.style.display = 'flex';
+
+      const interval = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+
+        if (countdown <= 0) {
+          clearInterval(interval);
+          realDownloadBtn.href = fileUrl;
+          realDownloadBtn.style.display = 'inline-block';
+        }
+      }, 1000);
+
+      // عند الضغط خارج المودال يتم الإغلاق
+      modal.addEventListener('click', function handler(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          clearInterval(interval);
+          modal.removeEventListener('click', handler); // إزالة المستمع لتجنب التكرار
+        }
+      });
+    });
+  });
+</script>
